@@ -1,6 +1,7 @@
 ﻿public enum SceneState
 {
-	Start,
-	End,
+	BuildingPhase,
+	LoopingPhase,
+	GameOver,
 	Pause
 }

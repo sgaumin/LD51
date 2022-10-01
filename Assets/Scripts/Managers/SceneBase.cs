@@ -11,7 +11,9 @@ using static Facade;
 
 public class SceneBase : Singleton<SceneBase>
 {
-	public event Action OnStart;
+	public event Action OnBuildingPhase;
+
+	public event Action OnLoopingPhase;
 
 	public event Action OnEnd;
 
@@ -32,11 +34,15 @@ public class SceneBase : Singleton<SceneBase>
 
 			switch (value)
 			{
-				case SceneState.Start:
-					OnStart?.Invoke();
+				case SceneState.BuildingPhase:
+					OnBuildingPhase?.Invoke();
 					break;
 
-				case SceneState.End:
+				case SceneState.LoopingPhase:
+					OnLoopingPhase?.Invoke();
+					break;
+
+				case SceneState.GameOver:
 					OnEnd?.Invoke();
 					break;
 
