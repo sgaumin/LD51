@@ -75,6 +75,7 @@ public class EnemyController : MonoBehaviour, ISwordTarget
 	{
 		if (hasBeenAlreadyTouched) return;
 
+		Level.FreezeTime();
 		hasBeenAlreadyTouched = true;
 		if (--lifePoints <= 0)
 		{

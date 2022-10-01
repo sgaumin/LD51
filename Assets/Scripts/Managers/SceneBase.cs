@@ -112,7 +112,7 @@ public class SceneBase : Singleton<SceneBase>
 		effectHandler.BoostTime(startValue, duration);
 	}
 
-	public void FreezeTime(float duration = 0.1f)
+	public void FreezeTime(float duration = 0.5f)
 	{
 		effectHandler.FreezeTime(duration);
 	}

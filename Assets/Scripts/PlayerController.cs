@@ -80,6 +80,7 @@ public class PlayerController : Singleton<PlayerController>
 	{
 		Life--;
 		Level.GenerateImpulse();
+		Level.FreezeTime();
 	}
 
 	private void OnDestroy()

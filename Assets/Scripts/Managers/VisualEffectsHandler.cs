@@ -85,7 +85,7 @@ public class VisualEffectsHandler : MonoBehaviour
 	{
 		_timerScaler.Kill();
 		Time.timeScale = 0f;
-		_timerScaler = DOTween.To(() => Time.timeScale, x => Time.timeScale = x, 1, duration).SetEase(Ease.OutSine).SetUpdate(true);
+		_timerScaler = DOTween.To(() => Time.timeScale, x => Time.timeScale = x, 1, duration).SetEase(Ease.OutExpo).SetUpdate(true);
 	}
 
 	public void BoostTime(float startValue, float duration = 0.1f)
