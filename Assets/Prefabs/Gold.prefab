@@ -72,12 +72,12 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1998432887
+  m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b,
+  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847,
     type: 3}
-  m_Color: {r: 1, g: 0.8563031, b: 0, a: 1}
+  m_Color: {r: 0.9764706, g: 0.7607843, b: 0.16862746, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -115,10 +115,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 761d3888091edc54ba2122eb8bf9b32c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flahingDuration: 0.1
-  flahingLoop: 14
+  flahingDuration: 0.05
+  flahingLoop: 18
   spawningForce:
-    min: 0.5
+    min: 0.7
     max: 0.7
   spawningAngleOffset:
     min: -10

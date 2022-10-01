@@ -8,7 +8,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - CardHUD
   - Water
   - UI
   - 
@@ -47,6 +47,9 @@ TagManager:
   - name: Building
     uniqueID: 4072579733
     locked: 0
+  - name: Collectable
+    uniqueID: 2296534409
+    locked: 0
   - name: Enemy
     uniqueID: 227871143
     locked: 0
@@ -55,6 +58,15 @@ TagManager:
     locked: 0
   - name: Sword
     uniqueID: 1859706733
+    locked: 0
+  - name: Effects
+    uniqueID: 2325356629
+    locked: 0
+  - name: CardHUD
+    uniqueID: 4138426733
+    locked: 0
+  - name: OnTop
+    uniqueID: 1752508771
     locked: 0
   - name: Fader
     uniqueID: 1476709903

@@ -66,6 +66,24 @@ public class SceneBase : Singleton<SceneBase>
 		Screen.sleepTimeout = SleepTimeout.NeverSleep;
 	}
 
+	private void Update()
+	{
+#if UNITY_STANDALONE_OSX || UNITY_STANDALONE_WIN || UNITY_STANDALONE_LINUX || UNITY_EDITOR
+		if (Input.GetButtonDown("Quit"))
+		{
+			Level.Quit();
+		}
+		if (Input.GetButtonDown("Mute"))
+		{
+			Level.Mute();
+		}
+		if (Input.GetButtonDown("Fullscreen"))
+		{
+			Screen.fullScreen = !Screen.fullScreen;
+		}
+#endif
+	}
+
 	#region Level Loading
 
 	public void ReloadScene() => levelLoader.Reload();

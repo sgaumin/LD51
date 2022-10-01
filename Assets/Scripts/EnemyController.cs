@@ -13,6 +13,8 @@ using Random = UnityEngine.Random;
 
 public class EnemyController : MonoBehaviour, ISwordTarget
 {
+	[SerializeField, Range(0f, 1f)] private float probabilityGold = 0.5f;
+
 	[Header("Movements")]
 	[SerializeField] private float movementSpeed = 0.5f;
 	[SerializeField] private float moveAroundMaxRange = 1f;
@@ -29,6 +31,13 @@ public class EnemyController : MonoBehaviour, ISwordTarget
 	[Header("Attack")]
 	[SerializeField] private EnemyBullet bulletPrefab;
 
+	[Header("Idle Animation")]
+	[SerializeField] private float idleAnimationFactor = 1.5f;
+	[SerializeField, FloatRangeSlider(0f, 3f)] private FloatRange idleAnimationDuration = new FloatRange(1f, 1.5f);
+
+	[Header("References")]
+	[SerializeField] private SpriteRenderer spriteRenderer;
+
 	private int lifePoints;
 	private Vector2 spawnPoint;
 	private bool hasBeenAlreadyTouched;
@@ -44,6 +53,11 @@ public class EnemyController : MonoBehaviour, ISwordTarget
 	private void Start()
 	{
 		lifePoints = 1;
+	}
+
+	private void Update()
+	{
+		spriteRenderer.sortingOrder = -Mathf.FloorToInt(transform.position.y * 1000);
 	}
 
 	public void Init(Vector2 spawnPoint)
@@ -131,9 +145,12 @@ public class EnemyController : MonoBehaviour, ISwordTarget
 
 	private void Kill()
 	{
-		Gold gold = Instantiate(Prefabs.goldPrefab);
-		gold.Spawn(transform.position);
+		if (Random.value <= probabilityGold)
+		{
+			Gold gold = Instantiate(Prefabs.goldPrefab);
+			gold.Spawn(transform.position);
+		}
 
-		gameObject.SetActive(false);
+		Destroy(gameObject);
 	}
 }

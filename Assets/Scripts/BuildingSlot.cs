@@ -1,25 +1,17 @@
-using DG.Tweening;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using TMPro;
-using Utils;
-using Utils.Dependency;
 using UnityEngine;
-using UnityEngine.UI;
 using static Facade;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class BuildingSlot : MonoBehaviour
 {
 	[Header("Animations")]
-	[SerializeField] private Color onEntered;
-	[SerializeField] private Color onPressed;
-	[SerializeField] private Color defaultColor;
+	[SerializeField] private Sprite defaultSprite;
+	[SerializeField] private Sprite selectedSprite;
 
 	[Header("References")]
 	[SerializeField] private SpriteRenderer spriteRenderer;
+	[SerializeField] private Canvas canvas;
 	[SerializeField] private TextMeshProUGUI levelIndicator;
 	[SerializeField] private BuildingController buildingPrefab;
 	[SerializeField] private Transform itemSpawn;
@@ -42,11 +34,24 @@ public class BuildingSlot : MonoBehaviour
 		itemSpawn.transform.position = position;
 	}
 
+	public void SetCanvas(Vector2 position)
+	{
+		canvas.transform.position = position;
+	}
+
+	private void OnMouseOver()
+	{
+		if (Level.State == SceneState.BuildingPhase && currentBuilding is null)
+		{
+			spriteRenderer.sprite = selectedSprite;
+		}
+	}
+
 	private void OnMouseEnter()
 	{
 		if (Level.State == SceneState.BuildingPhase && currentBuilding is null)
 		{
-			spriteRenderer.color = onEntered;
+			spriteRenderer.sprite = selectedSprite;
 		}
 	}
 
@@ -54,7 +59,7 @@ public class BuildingSlot : MonoBehaviour
 	{
 		if (Level.State == SceneState.BuildingPhase && currentBuilding is null)
 		{
-			spriteRenderer.color = defaultColor;
+			spriteRenderer.sprite = defaultSprite;
 		}
 	}
 
@@ -62,7 +67,7 @@ public class BuildingSlot : MonoBehaviour
 	{
 		if (Level.State == SceneState.BuildingPhase && currentBuilding is null)
 		{
-			spriteRenderer.color = onPressed;
+			spriteRenderer.sprite = selectedSprite;
 		}
 	}
 
@@ -70,7 +75,7 @@ public class BuildingSlot : MonoBehaviour
 	{
 		if (Level.State == SceneState.BuildingPhase && currentBuilding is null)
 		{
-			spriteRenderer.color = onEntered;
+			spriteRenderer.enabled = false;
 
 			currentBuilding = Instantiate(buildingPrefab, transform);
 			currentBuilding.transform.position = transform.position;
@@ -84,8 +89,9 @@ public class BuildingSlot : MonoBehaviour
 	private void OnBuildingKill()
 	{
 		CurrentLevel++;
+		spriteRenderer.enabled = true;
 		currentBuilding = null;
-		spriteRenderer.color = defaultColor;
+		spriteRenderer.sprite = defaultSprite;
 	}
 
 	private void UpdateLevelIndicator(int value)

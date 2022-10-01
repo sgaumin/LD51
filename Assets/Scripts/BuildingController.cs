@@ -7,6 +7,7 @@ using TMPro;
 using UnityEngine;
 using Utils;
 using static Facade;
+using Random = UnityEngine.Random;
 
 public class BuildingController : MonoBehaviour
 {
@@ -14,9 +15,11 @@ public class BuildingController : MonoBehaviour
 
 	[SerializeField] private int spawnMax = 3;
 	[SerializeField] private GameObject itemToSpawn;
+	[SerializeField, FloatRangeSlider(0f, 3f)] private FloatRange offset = new FloatRange(1f, 1.5f);
 
 	private Vector2 itemSpawn;
 	private int spawnedCount;
+	private Queue<GameObject> items = new Queue<GameObject>();
 
 	public void Init(Vector2 itemSpawn)
 	{
@@ -24,16 +27,21 @@ public class BuildingController : MonoBehaviour
 
 		this.itemSpawn = itemSpawn;
 
+		for (int i = 0; i < spawnMax; i++)
+		{
+			GameObject item = Instantiate(itemToSpawn);
+			Vector2 positionOffset = new Vector2((Random.value > 0.5f ? -1f : 1f) * offset.RandomValue, (Random.value > 0.5f ? -1f : 1f) * offset.RandomValue);
+			item.transform.position = (Vector2)transform.position + positionOffset;
+			items.Enqueue(item);
+		}
 		// TODO: Gain gold on setup
 	}
 
 	private void Spawn()
 	{
 		spawnedCount++;
-		GameObject item = Instantiate(itemToSpawn);
-		item.transform.position = transform.position;
 
-		if (item.TryGetComponent(out EnemyController enemy))
+		if (items.Dequeue().TryGetComponent(out EnemyController enemy))
 		{
 			enemy.Init(itemSpawn);
 			enemy.MoveBackToSpawn();

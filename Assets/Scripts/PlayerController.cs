@@ -23,8 +23,16 @@ public class PlayerController : Singleton<PlayerController>
 	[SerializeField] private SwordController sword;
 
 	private Coroutine swordRotation;
+	private int goldCount;
 
-	public int Gold { get; set; }
+	public int Gold
+	{
+		get => goldCount; set
+		{
+			goldCount = value;
+			CardHUD.Instance.SetGoldValue(goldCount);
+		}
+	}
 	public int Life { get; private set; }
 	public int LoopIndex { get; set; }
 
@@ -32,6 +40,11 @@ public class PlayerController : Singleton<PlayerController>
 	{
 		base.Awake();
 		Level.OnLoopingPhase += StartSwordRotation;
+	}
+
+	private void Start()
+	{
+		Gold = 0;
 	}
 
 	[ContextMenu("StartSwordRotation")]

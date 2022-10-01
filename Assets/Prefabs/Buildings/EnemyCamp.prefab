@@ -48,6 +48,9 @@ MonoBehaviour:
   spawnMax: 3
   itemToSpawn: {fileID: 8423470161492846747, guid: 305aef5de88621f48a209f04f12a1bc6,
     type: 3}
+  offset:
+    min: 0.1
+    max: 0.3
 --- !u!212 &7272947944641510288
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -89,9 +92,8 @@ SpriteRenderer:
   m_SortingLayerID: -222387563
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: -5177388603050735206, guid: 71ebafeef3c03457483266a33ab2b270,
-    type: 3}
-  m_Color: {r: 1, g: 0, b: 0.03836775, a: 1}
+  m_Sprite: {fileID: 21300000, guid: b815c85b432555f4ab5781c7791a2bb5, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

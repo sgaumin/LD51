@@ -2,7 +2,6 @@ using Utils;
 using UnityEngine;
 using UnityEngine.UI;
 using NaughtyAttributes;
-using TreeEditor;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -11,6 +10,7 @@ public class GroundController : MonoBehaviour
 {
 	[SerializeField] private int buildingSlotCount = 10;
 	[SerializeField] private float buildingSlotDistanceFromOrigin = 2f;
+	[SerializeField] private float canvasDistanceFromOrigin = 4f;
 	[SerializeField, FloatRangeSlider(0f, 10f)] private FloatRange slotPositionOffset = new FloatRange(1f, 3f);
 	[SerializeField, FloatRangeSlider(0f, 10f)] private FloatRange itemSpawnDistanceFromOrigin = new FloatRange(1f, 2f);
 	[SerializeField] private float rotationOffset = 10f;
@@ -33,6 +33,7 @@ public class GroundController : MonoBehaviour
 			slot.transform.position = position * buildingSlotDistanceFromOrigin + (Vector2)transform.position + positionOffset;
 			slot.transform.localScale = new Vector3(1f / transform.localScale.x, 1f / transform.localScale.y, 1f / transform.localScale.z);
 			slot.SetItemSpawn(position * itemSpawnDistanceFromOrigin.RandomValue + (Vector2)transform.position);
+			slot.SetCanvas(position * canvasDistanceFromOrigin + (Vector2)transform.position + positionOffset);
 			slot.name = $"BuildingSlot_{i}";
 		}
 	}

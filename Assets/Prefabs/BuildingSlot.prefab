@@ -77,8 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 1747389147
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2747690628134850419, guid: a9716c16a44a94eed9b5c90fbf4d9bdd,
-    type: 3}
+  m_Sprite: {fileID: 589523166, guid: 15a7212a934423e4aaa9e76d8d2193e3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -117,10 +116,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e1b641dfd02db48a1e6d52c963b13a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onEntered: {r: 0.31764722, g: 1, b: 0, a: 1}
-  onPressed: {r: 1, g: 0, b: 0, a: 1}
-  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  defaultSprite: {fileID: 589523166, guid: 15a7212a934423e4aaa9e76d8d2193e3, type: 3}
+  selectedSprite: {fileID: 1719463936, guid: 15a7212a934423e4aaa9e76d8d2193e3, type: 3}
   spriteRenderer: {fileID: 8518287074735218418}
+  canvas: {fileID: 1047968483559614266}
   levelIndicator: {fileID: 5821902752973753422}
   buildingPrefab: {fileID: 7272947944641510289, guid: a2c5dcb16e6e0704f94c0cd08622edb5,
     type: 3}
@@ -162,7 +161,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -0.679}
   m_SizeDelta: {x: 1.6023, y: 0.902}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1047968483559614266
@@ -333,8 +332,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

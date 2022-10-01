@@ -21,6 +21,11 @@ public class Gold : MonoBehaviour, ISwordTarget
 	private bool isInteractible;
 	private Coroutine spawning;
 
+	private void Awake()
+	{
+		Player.OnStartLoop += MakeItInteraticle;
+	}
+
 	public void Spawn(Vector2 position)
 	{
 		this.TryStartCoroutine(SpawnCore(position), ref spawning);
@@ -40,6 +45,10 @@ public class Gold : MonoBehaviour, ISwordTarget
 		transform.DOMove(targetPosition, spawningDuration.RandomValue).SetEase(spawningEase);
 
 		yield return flasher.WaitForCompletion();
+	}
+
+	private void MakeItInteraticle()
+	{
 		isInteractible = true;
 	}
 
@@ -47,7 +56,19 @@ public class Gold : MonoBehaviour, ISwordTarget
 	{
 		if (!isInteractible) return;
 
-		Player.Gold++;
-		gameObject.SetActive(false);
+		spriteRenderer.gameObject.layer = LayerMask.NameToLayer("CardHUD");
+		spriteRenderer.sortingLayerName = "CardHUD";
+		spriteRenderer.sortingOrder = 10;
+
+		transform.DOMove(CardHUD.Instance.GoldIconPosition, 0.6f).SetEase(Ease.OutSine).OnComplete(() =>
+		{
+			Player.Gold++;
+			Destroy(gameObject);
+		});
+	}
+
+	private void OnDestroy()
+	{
+		Player.OnStartLoop -= MakeItInteraticle;
 	}
 }
