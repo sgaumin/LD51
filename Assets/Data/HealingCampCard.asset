@@ -15,4 +15,7 @@ MonoBehaviour:
   cardName: HEALING CENTER
   cardSprite: {fileID: 21300000, guid: 18289b66fe0bf0745bcad8783d052f14, type: 3}
   slotSprite: {fileID: 21300000, guid: d92ec1d555e9db4488f43f8ef5e0acfa, type: 3}
-  weigth: 3
+  weigth: 4
+  spawnMax: 4
+  item: {fileID: 2573105101543351128, guid: ef324bc133d5a3646b736b27089385a3, type: 3}
+  probability: 0.7

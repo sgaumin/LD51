@@ -6,11 +6,12 @@ using static Facade;
 public class EnemyBullet : MonoBehaviour
 {
 	[SerializeField, FloatRangeSlider(0f, 2f)] private FloatRange speed = new FloatRange(1.2f, 1.5f);
+	[SerializeField] private Ease moveEase = Ease.Linear;
 
 	public void Shoot()
 	{
 		float duration = Vector2.Distance(Player.transform.position, transform.position) / speed.RandomValue;
-		transform.DOMove(Player.transform.position, duration).OnComplete(() => { DealingDamage(); });
+		transform.DOMove(Player.transform.position, duration).OnComplete(() => { DealingDamage(); }).SetEase(moveEase);
 	}
 
 	private void DealingDamage()

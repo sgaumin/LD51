@@ -16,3 +16,6 @@ MonoBehaviour:
   cardSprite: {fileID: 21300000, guid: 840f0cd76f4a4a740a0cb5540f7f9951, type: 3}
   slotSprite: {fileID: 21300000, guid: b815c85b432555f4ab5781c7791a2bb5, type: 3}
   weigth: 8
+  spawnMax: 3
+  item: {fileID: 8423470161492846747, guid: 305aef5de88621f48a209f04f12a1bc6, type: 3}
+  probability: 0.5

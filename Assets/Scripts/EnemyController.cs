@@ -31,10 +31,6 @@ public class EnemyController : MonoBehaviour, ISwordTarget
 	[Header("Attack")]
 	[SerializeField] private EnemyBullet bulletPrefab;
 
-	[Header("Idle Animation")]
-	[SerializeField] private float idleAnimationFactor = 1.5f;
-	[SerializeField, FloatRangeSlider(0f, 3f)] private FloatRange idleAnimationDuration = new FloatRange(1f, 1.5f);
-
 	[Header("References")]
 	[SerializeField] private SpriteRenderer spriteRenderer;
 
@@ -52,7 +48,7 @@ public class EnemyController : MonoBehaviour, ISwordTarget
 
 	private void Start()
 	{
-		lifePoints = 1;
+		lifePoints = 2;
 	}
 
 	private void Update()
@@ -77,7 +73,9 @@ public class EnemyController : MonoBehaviour, ISwordTarget
 
 		Level.FreezeTime();
 		hasBeenAlreadyTouched = true;
-		if (--lifePoints <= 0)
+		lifePoints -= Player.Attack;
+
+		if (lifePoints <= 0)
 		{
 			Kill();
 			return;

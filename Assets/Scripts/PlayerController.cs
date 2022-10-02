@@ -15,6 +15,11 @@ public class PlayerController : Singleton<PlayerController>
 	public Action OnStartLoop;
 	public Action OnEndLoop;
 	public Action OnTick;
+	public Action<int> OnReceivingGold;
+
+	[SerializeField] private int startLifePoint = 3;
+	[SerializeField] private int startGold = 0;
+	[SerializeField] private int startAttack = 1;
 
 	[Header("Animations")]
 	[SerializeField] private Ease easeRotation;
@@ -24,17 +29,64 @@ public class PlayerController : Singleton<PlayerController>
 
 	private Coroutine swordRotation;
 	private int goldCount;
+	private int attackCount;
+	private int maxLifeCount;
+	private int lifeCount;
+	private int loopIndex;
 
 	public int Gold
 	{
 		get => goldCount; set
 		{
 			goldCount = value;
-			CardHUD.Instance.SetGoldValue(goldCount);
+			OnReceivingGold?.Invoke(goldCount);
 		}
 	}
-	public int Life { get; private set; }
-	public int LoopIndex { get; set; }
+
+	public int Attack
+	{
+		get => attackCount;
+		set
+		{
+			attackCount = value;
+			Card.UpdateAttack();
+		}
+	}
+
+	public int MaxLife
+	{
+		get => maxLifeCount;
+		private set
+		{
+			maxLifeCount = Mathf.Max(0, value);
+			Card.UpdateLife();
+		}
+	}
+
+	public int Life
+	{
+		get => lifeCount;
+		set
+		{
+			lifeCount = Mathf.Clamp(value, 0, maxLifeCount);
+			Card.UpdateLife();
+
+			if (lifeCount <= 0)
+			{
+				Level.ReloadScene();
+			}
+		}
+	}
+
+	public int LoopIndex
+	{
+		get => loopIndex;
+		set
+		{
+			loopIndex = value;
+			Card.SetLoopIndicator(loopIndex);
+		}
+	}
 
 	protected override void Awake()
 	{
@@ -44,7 +96,15 @@ public class PlayerController : Singleton<PlayerController>
 
 	private void Start()
 	{
-		Gold = 0;
+		Attack = startAttack;
+		MaxLife = startLifePoint;
+		Life = startLifePoint;
+		Gold = startGold;
+	}
+
+	private void HealFull()
+	{
+		Life = MaxLife;
 	}
 
 	[ContextMenu("StartSwordRotation")]
@@ -72,8 +132,16 @@ public class PlayerController : Singleton<PlayerController>
 			tickCount++;
 			OnTick?.Invoke();
 		}
+
 		OnEndLoop?.Invoke();
+		LoopIndex++;
 		Level.State = SceneState.BuildingPhase;
+	}
+
+	public void IncreaseMaxLife()
+	{
+		MaxLife++;
+		HealFull();
 	}
 
 	public void TakeDamage()

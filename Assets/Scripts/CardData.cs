@@ -7,4 +7,7 @@ public class CardData : ScriptableObject
 	public Sprite cardSprite;
 	public Sprite slotSprite;
 	public int weigth;
+	public int spawnMax = 3;
+	public GameObject item;
+	[Range(0f, 1f)] public float probability;
 }

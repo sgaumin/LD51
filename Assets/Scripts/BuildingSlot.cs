@@ -5,6 +5,8 @@ using static Facade;
 [RequireComponent(typeof(SpriteRenderer))]
 public class BuildingSlot : MonoBehaviour
 {
+	private const int MAX_LEVEL = 2;
+
 	[Header("Animations")]
 	[SerializeField] private Sprite defaultSprite;
 	[SerializeField] private Sprite selectedSprite;
@@ -24,7 +26,7 @@ public class BuildingSlot : MonoBehaviour
 		get => currentLevel;
 		private set
 		{
-			currentLevel = value;
+			currentLevel = Mathf.Min(value, MAX_LEVEL);
 			UpdateLevelIndicator(currentLevel);
 		}
 	}
