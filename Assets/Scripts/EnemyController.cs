@@ -13,7 +13,9 @@ using Random = UnityEngine.Random;
 
 public class EnemyController : MonoBehaviour, ISwordTarget
 {
+	[SerializeField] private int startLifePoint = 1;
 	[SerializeField, Range(0f, 1f)] private float probabilityGold = 0.5f;
+	[SerializeField, Range(0f, 1f)] private float probabilityShield = 0.3f;
 
 	[Header("Movements")]
 	[SerializeField] private float movementSpeed = 0.5f;
@@ -31,10 +33,17 @@ public class EnemyController : MonoBehaviour, ISwordTarget
 	[Header("Attack")]
 	[SerializeField] private EnemyBullet bulletPrefab;
 
+	[Header("Life Bar")]
+	[SerializeField] private GameObject lifeBarHolder;
+	[SerializeField] private Image foregroundBar;
+
 	[Header("References")]
 	[SerializeField] private SpriteRenderer spriteRenderer;
+	[SerializeField] private Sprite shiledSprite;
 
+	private int realStartLifePoints;
 	private int lifePoints;
+	private bool hasShield;
 	private Vector2 spawnPoint;
 	private bool hasBeenAlreadyTouched;
 	private Coroutine pushbackRoutine;
@@ -48,7 +57,13 @@ public class EnemyController : MonoBehaviour, ISwordTarget
 
 	private void Start()
 	{
-		lifePoints = 2;
+		hasShield = Random.value <= probabilityShield;
+		if (hasShield)
+		{
+			spriteRenderer.sprite = shiledSprite;
+		}
+		realStartLifePoints = startLifePoint + (hasShield ? 1 : 0);
+		lifePoints = realStartLifePoints;
 	}
 
 	private void Update()
@@ -81,6 +96,7 @@ public class EnemyController : MonoBehaviour, ISwordTarget
 			return;
 		}
 
+		UpdateLifeBar();
 		PushBack();
 	}
 
@@ -133,6 +149,15 @@ public class EnemyController : MonoBehaviour, ISwordTarget
 			yield return mover.WaitForCompletion();
 			yield return new WaitForSeconds(movementBreakDuration.RandomValue);
 		}
+	}
+
+	private void UpdateLifeBar()
+	{
+		bool check = lifePoints == realStartLifePoints;
+		lifeBarHolder.SetActive(!check);
+		if (check) return;
+
+		foregroundBar.fillAmount = (float)lifePoints / realStartLifePoints;
 	}
 
 	private void Attack()

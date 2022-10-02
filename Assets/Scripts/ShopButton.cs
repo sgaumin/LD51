@@ -9,6 +9,7 @@ using Utils.Dependency;
 using UnityEngine;
 using UnityEngine.UI;
 using static Facade;
+using System.Drawing.Text;
 
 public class ShopButton : MonoBehaviour
 {
@@ -20,8 +21,7 @@ public class ShopButton : MonoBehaviour
 	}
 
 	[SerializeField] private ShopButtonType type;
-	[SerializeField] private int startCost = 5;
-	[SerializeField] private int maxValue;
+	[SerializeField] private List<int> prices = new List<int>();
 
 	[Header("References")]
 	[SerializeField] private TextMeshProUGUI costText;
@@ -30,9 +30,13 @@ public class ShopButton : MonoBehaviour
 	[SerializeField] private TextMeshProUGUI buttonDescription;
 
 	private bool isMaxed;
+	private int currentPriceIndex = 0;
+
+	private int ExtraLoopCost => Mathf.FloorToInt(Player.LoopIndex / 3);
 
 	private void Awake()
 	{
+		Player.OnEndLoop += UpdateCost;
 		Player.OnReceivingGold += UpdateStatus;
 	}
 
@@ -43,7 +47,17 @@ public class ShopButton : MonoBehaviour
 
 	private void UpdateCost()
 	{
-		costText.text = startCost.ToString();
+		CheckMaxed();
+		if (isMaxed) return;
+
+		if (type == ShopButtonType.Skip)
+		{
+			costText.text = (prices[currentPriceIndex] + ExtraLoopCost).ToString();
+		}
+		else
+		{
+			costText.text = prices[currentPriceIndex].ToString();
+		}
 		UpdateStatus(Player.Gold);
 	}
 
@@ -52,11 +66,11 @@ public class ShopButton : MonoBehaviour
 		switch (type)
 		{
 			case ShopButtonType.Life:
-				isMaxed = Player.MaxLife >= maxValue;
+				isMaxed = Player.MaxLife >= Player.StartMaxLife + prices.Count;
 				break;
 
 			case ShopButtonType.Attack:
-				isMaxed = Player.Attack >= maxValue;
+				isMaxed = Player.Attack >= Player.StartAttack + prices.Count;
 				break;
 		}
 	}
@@ -73,34 +87,51 @@ public class ShopButton : MonoBehaviour
 		}
 		else
 		{
-			button.interactable = value >= startCost;
-			costText.color = value >= startCost ? Color.white : Color.red;
+			if (type == ShopButtonType.Skip)
+			{
+				button.interactable = value >= prices[currentPriceIndex] + ExtraLoopCost;
+				costText.color = value >= prices[currentPriceIndex] + ExtraLoopCost ? Color.white : Color.red;
+			}
+			else
+			{
+				button.interactable = value >= prices[currentPriceIndex];
+				costText.color = value >= prices[currentPriceIndex] ? Color.white : Color.red;
+			}
 		}
 	}
 
 	public void Buy()
 	{
-		if (Player.Gold < startCost) return;
+		if (type == ShopButtonType.Skip)
+		{
+			if (Player.Gold < prices[0] + ExtraLoopCost) return;
+		}
+		else
+		{
+			if (Player.Gold < prices[currentPriceIndex]) return;
+		}
 
-		Player.Gold -= startCost;
 		switch (type)
 		{
 			case ShopButtonType.Life:
 				Player.IncreaseMaxLife();
-
+				Player.Gold -= prices[currentPriceIndex++];
 				break;
 
 			case ShopButtonType.Attack:
 				Player.Attack++;
-				isMaxed = Player.Attack >= maxValue;
+				Player.Gold -= prices[currentPriceIndex++];
 				break;
 
 			case ShopButtonType.Skip:
 				Card.SkipCard();
+				Player.Gold -= prices[0] + ExtraLoopCost;
 				break;
 
 			default:
 				break;
 		}
+
+		UpdateCost();
 	}
 }

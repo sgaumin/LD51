@@ -53,6 +53,9 @@ public class PlayerController : Singleton<PlayerController>
 		}
 	}
 
+	public int StartMaxLife => startLifePoint;
+	public int StartAttack => startAttack;
+
 	public int MaxLife
 	{
 		get => maxLifeCount;
@@ -84,7 +87,9 @@ public class PlayerController : Singleton<PlayerController>
 		set
 		{
 			loopIndex = value;
+			OnEndLoop?.Invoke();
 			Card.SetLoopIndicator(loopIndex);
+			Level.State = SceneState.BuildingPhase;
 		}
 	}
 
@@ -96,6 +101,7 @@ public class PlayerController : Singleton<PlayerController>
 
 	private void Start()
 	{
+		LoopIndex = 0;
 		Attack = startAttack;
 		MaxLife = startLifePoint;
 		Life = startLifePoint;
@@ -133,9 +139,7 @@ public class PlayerController : Singleton<PlayerController>
 			OnTick?.Invoke();
 		}
 
-		OnEndLoop?.Invoke();
 		LoopIndex++;
-		Level.State = SceneState.BuildingPhase;
 	}
 
 	public void IncreaseMaxLife()

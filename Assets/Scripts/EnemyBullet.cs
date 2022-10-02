@@ -5,7 +5,7 @@ using static Facade;
 
 public class EnemyBullet : MonoBehaviour
 {
-	[SerializeField, FloatRangeSlider(0f, 2f)] private FloatRange speed = new FloatRange(1.2f, 1.5f);
+	[SerializeField, FloatRangeSlider(0f, 4f)] private FloatRange speed = new FloatRange(1.2f, 1.5f);
 	[SerializeField] private Ease moveEase = Ease.Linear;
 
 	public void Shoot()

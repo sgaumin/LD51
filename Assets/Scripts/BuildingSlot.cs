@@ -82,7 +82,7 @@ public class BuildingSlot : MonoBehaviour
 			currentBuilding = Instantiate(buildingPrefab, transform);
 			currentBuilding.transform.position = transform.position;
 			currentBuilding.OnKill += OnBuildingKill;
-			currentBuilding.Init(itemSpawn.position);
+			currentBuilding.Init(itemSpawn.position, CurrentLevel);
 
 			Level.State = SceneState.LoopingPhase;
 		}

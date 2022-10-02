@@ -15,7 +15,8 @@ MonoBehaviour:
   cardName: MONSTER CAMP
   cardSprite: {fileID: 21300000, guid: 840f0cd76f4a4a740a0cb5540f7f9951, type: 3}
   slotSprite: {fileID: 21300000, guid: b815c85b432555f4ab5781c7791a2bb5, type: 3}
-  weigth: 8
-  spawnMax: 3
-  item: {fileID: 8423470161492846747, guid: 305aef5de88621f48a209f04f12a1bc6, type: 3}
-  probability: 0.5
+  weigth: 9
+  levels:
+  - {fileID: 11400000, guid: c1325652bf20bac448d1d5cde91e6ca4, type: 2}
+  - {fileID: 11400000, guid: 4a4c6decc3ec09b499deb3c558c8ce33, type: 2}
+  - {fileID: 11400000, guid: db4698f7c5e1b744cb6aa11e2141cc94, type: 2}

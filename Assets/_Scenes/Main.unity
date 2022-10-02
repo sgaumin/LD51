@@ -254,6 +254,21 @@ PrefabInstance:
       propertyPath: maxValue
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: -3476735587972179051, guid: f3d630cb17d2270488dacc17844e5136,
+        type: 3}
+      propertyPath: prices.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -3476735587972179051, guid: f3d630cb17d2270488dacc17844e5136,
+        type: 3}
+      propertyPath: prices.Array.data[0]
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: -3476735587972179051, guid: f3d630cb17d2270488dacc17844e5136,
+        type: 3}
+      propertyPath: prices.Array.data[1]
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 2533390256592331335, guid: f3d630cb17d2270488dacc17844e5136,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2285,7 +2300,7 @@ ParticleSystem:
   looping: 1
   prewarm: 1
   playOnAwake: 1
-  useUnscaledTime: 0
+  useUnscaledTime: 1
   autoRandomSeed: 1
   startDelay:
     serializedVersion: 2
@@ -2903,7 +2918,7 @@ ParticleSystem:
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 20, y: 15, z: 1}
+    m_Scale: {x: 30, y: 25, z: 1}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -3101,7 +3116,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 10
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -8779,8 +8794,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
-  startCost: 5
-  maxValue: 0
+  prices: 05000000
   costText: {fileID: 3708580520767367537}
   button: {fileID: 2947418391355014368}
   indications: {fileID: 0}
@@ -9798,6 +9812,36 @@ PrefabInstance:
       propertyPath: maxValue
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: -3476735587972179051, guid: f3d630cb17d2270488dacc17844e5136,
+        type: 3}
+      propertyPath: prices.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -3476735587972179051, guid: f3d630cb17d2270488dacc17844e5136,
+        type: 3}
+      propertyPath: prices.Array.data[0]
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -3476735587972179051, guid: f3d630cb17d2270488dacc17844e5136,
+        type: 3}
+      propertyPath: prices.Array.data[1]
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: -3476735587972179051, guid: f3d630cb17d2270488dacc17844e5136,
+        type: 3}
+      propertyPath: prices.Array.data[2]
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: -3476735587972179051, guid: f3d630cb17d2270488dacc17844e5136,
+        type: 3}
+      propertyPath: prices.Array.data[3]
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: -3476735587972179051, guid: f3d630cb17d2270488dacc17844e5136,
+        type: 3}
+      propertyPath: prices.Array.data[4]
+      value: 26
+      objectReference: {fileID: 0}
     - target: {fileID: 2533390256592331335, guid: f3d630cb17d2270488dacc17844e5136,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -9911,7 +9955,7 @@ PrefabInstance:
     - target: {fileID: 6007973956035875197, guid: f3d630cb17d2270488dacc17844e5136,
         type: 3}
       propertyPath: m_Name
-      value: BuyButton
+      value: BuyLife
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3d630cb17d2270488dacc17844e5136, type: 3}

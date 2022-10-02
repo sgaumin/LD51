@@ -25,21 +25,23 @@ public class BuildingController : MonoBehaviour
 	private int spawnedCount;
 	private int currentSpawnMax;
 	private Queue<GameObject> items = new Queue<GameObject>();
+	private int level;
 
-	public void Init(Vector2 itemSpawn)
+	public void Init(Vector2 itemSpawn, int level)
 	{
 		Player.OnStartLoop += Spawn;
 		Player.OnEndLoop += CheckStatus;
 
+		this.level = level;
 		data = Card.Current;
 		spriteRenderer.sprite = data.slotSprite;
 
 		this.itemSpawn = itemSpawn;
 
-		currentSpawnMax = Random.Range(1, data.spawnMax + 1);
+		currentSpawnMax = Random.Range(1, data.levels[level].spawnMax + 1);
 		for (int i = 0; i < currentSpawnMax; i++)
 		{
-			GameObject item = Instantiate(data.item);
+			GameObject item = Instantiate(data.levels[level].items.Random());
 			Vector2 positionOffset = new Vector2((Random.value > 0.5f ? -1f : 1f) * offset.RandomValue, (Random.value > 0.5f ? -1f : 1f) * offset.RandomValue);
 			item.transform.position = (Vector2)transform.position + positionOffset;
 			items.Enqueue(item);
@@ -55,7 +57,7 @@ public class BuildingController : MonoBehaviour
 
 	private void Spawn()
 	{
-		if (Random.value > data.probability) return;
+		if (Random.value > data.levels[level].probability) return;
 
 		spawnedCount++;
 
@@ -97,6 +99,7 @@ public class BuildingController : MonoBehaviour
 	{
 		Player.OnStartLoop -= Spawn;
 		OnKill?.Invoke();
+		OnKill = null;
 		gameObject.SetActive(false);
 	}
 }
