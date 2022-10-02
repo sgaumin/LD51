@@ -633,8 +633,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  startCost: 5
-  maxValue: 0
+  prices: 
+  clickSound:
+    isUsingClips: 0
+    clip: {fileID: 8300000, guid: 67ca0447f9490044187ccbff74a89f40, type: 3}
+    clips: []
+    mixerGroup: {fileID: 8557278918978590860, guid: dbd143edd4df0224d92ac4ff39f0844e,
+      type: 2}
+    loopType: 0
+    timeBetweenLoop:
+      min: 1
+      max: 3
+    pitchVariation: 1
+    autoDestroy: 0
+    multiplier: 5
   costText: {fileID: 6230993600430731531}
   button: {fileID: 5613803550645249178}
   indications: {fileID: 7970101686123378902}

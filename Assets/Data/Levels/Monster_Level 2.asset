@@ -16,4 +16,4 @@ MonoBehaviour:
   items:
   - {fileID: 5676955653094616129, guid: c0a371599a95fd44c9b8f612359f83fe, type: 3}
   - {fileID: 8423470161492846747, guid: 305aef5de88621f48a209f04f12a1bc6, type: 3}
-  probability: 0.5
+  probability: 0.75

@@ -11,6 +11,9 @@ public class BuildingSlot : MonoBehaviour
 	[SerializeField] private Sprite defaultSprite;
 	[SerializeField] private Sprite selectedSprite;
 
+	[Header("Audio")]
+	[SerializeField] private AudioExpress selectionSound;
+
 	[Header("References")]
 	[SerializeField] private SpriteRenderer spriteRenderer;
 	[SerializeField] private Canvas canvas;
@@ -31,6 +34,10 @@ public class BuildingSlot : MonoBehaviour
 		}
 	}
 
+	private bool ConditionsMet => Level.State == SceneState.BuildingPhase &&
+									currentBuilding is null &&
+									!GenericDialoguePopup.IsActive;
+
 	public void SetItemSpawn(Vector2 position)
 	{
 		itemSpawn.transform.position = position;
@@ -43,7 +50,7 @@ public class BuildingSlot : MonoBehaviour
 
 	private void OnMouseOver()
 	{
-		if (Level.State == SceneState.BuildingPhase && currentBuilding is null)
+		if (ConditionsMet)
 		{
 			spriteRenderer.sprite = selectedSprite;
 		}
@@ -51,7 +58,7 @@ public class BuildingSlot : MonoBehaviour
 
 	private void OnMouseEnter()
 	{
-		if (Level.State == SceneState.BuildingPhase && currentBuilding is null)
+		if (ConditionsMet)
 		{
 			spriteRenderer.sprite = selectedSprite;
 		}
@@ -59,7 +66,7 @@ public class BuildingSlot : MonoBehaviour
 
 	private void OnMouseExit()
 	{
-		if (Level.State == SceneState.BuildingPhase && currentBuilding is null)
+		if (ConditionsMet)
 		{
 			spriteRenderer.sprite = defaultSprite;
 		}
@@ -67,7 +74,7 @@ public class BuildingSlot : MonoBehaviour
 
 	private void OnMouseDown()
 	{
-		if (Level.State == SceneState.BuildingPhase && currentBuilding is null)
+		if (ConditionsMet)
 		{
 			spriteRenderer.sprite = selectedSprite;
 		}
@@ -75,8 +82,9 @@ public class BuildingSlot : MonoBehaviour
 
 	private void OnMouseUp()
 	{
-		if (Level.State == SceneState.BuildingPhase && currentBuilding is null)
+		if (ConditionsMet)
 		{
+			selectionSound.Play();
 			spriteRenderer.enabled = false;
 
 			currentBuilding = Instantiate(buildingPrefab, transform);

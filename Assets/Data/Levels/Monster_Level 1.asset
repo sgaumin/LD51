@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cac0b1b5ee73015468f075bc8ef93c3e, type: 3}
   m_Name: Monster_Level 1
   m_EditorClassIdentifier: 
-  spawnMax: 2
+  spawnMax: 3
   items:
   - {fileID: 8423470161492846747, guid: 305aef5de88621f48a209f04f12a1bc6, type: 3}
-  probability: 0.5
+  probability: 0.7

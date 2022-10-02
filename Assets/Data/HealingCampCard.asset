@@ -15,7 +15,7 @@ MonoBehaviour:
   cardName: HEALING CENTER
   cardSprite: {fileID: 21300000, guid: 18289b66fe0bf0745bcad8783d052f14, type: 3}
   slotSprite: {fileID: 21300000, guid: d92ec1d555e9db4488f43f8ef5e0acfa, type: 3}
-  weigth: 4
+  weigth: 3
   levels:
   - {fileID: 11400000, guid: fca77a4d15748a942ae980e5869cacee, type: 2}
   - {fileID: 11400000, guid: c135c5b215ad833468531182a50c3c70, type: 2}

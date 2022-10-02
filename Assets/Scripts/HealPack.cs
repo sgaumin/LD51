@@ -14,9 +14,11 @@ using static Facade;
 public class HealPack : MonoBehaviour, ISwordTarget
 {
 	[SerializeField] private SpriteRenderer spriteRenderer;
+	[SerializeField] private AudioExpress collectSound;
 
 	public void Interact()
 	{
+		collectSound.Play();
 		spriteRenderer.gameObject.layer = LayerMask.NameToLayer("CardHUD");
 		spriteRenderer.sortingLayerName = "CardHUD";
 		spriteRenderer.sortingOrder = 10;

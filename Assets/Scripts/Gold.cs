@@ -14,6 +14,7 @@ public class Gold : MonoBehaviour, ISwordTarget
 	[SerializeField, FloatRangeSlider(-90f, 90f)] private FloatRange spawningAngleOffset = new FloatRange(-30f, 30f);
 	[SerializeField, FloatRangeSlider(0f, 1f)] private FloatRange spawningDuration = new FloatRange(0.5f, 0.8f);
 	[SerializeField] private Ease spawningEase;
+	[SerializeField] private AudioExpress collectSound;
 
 	[Header("References")]
 	[SerializeField] private SpriteRenderer spriteRenderer;
@@ -55,6 +56,8 @@ public class Gold : MonoBehaviour, ISwordTarget
 	public void Interact()
 	{
 		if (!isInteractible) return;
+
+		collectSound.Play();
 
 		spriteRenderer.gameObject.layer = LayerMask.NameToLayer("CardHUD");
 		spriteRenderer.sortingLayerName = "CardHUD";

@@ -118,6 +118,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSprite: {fileID: 589523166, guid: 15a7212a934423e4aaa9e76d8d2193e3, type: 3}
   selectedSprite: {fileID: 1719463936, guid: 15a7212a934423e4aaa9e76d8d2193e3, type: 3}
+  selectionSound:
+    isUsingClips: 0
+    clip: {fileID: 8300000, guid: 67ca0447f9490044187ccbff74a89f40, type: 3}
+    clips: []
+    mixerGroup: {fileID: 8557278918978590860, guid: dbd143edd4df0224d92ac4ff39f0844e,
+      type: 2}
+    loopType: 0
+    timeBetweenLoop:
+      min: 1
+      max: 3
+    pitchVariation: 1
+    autoDestroy: 0
+    multiplier: 5
   spriteRenderer: {fileID: 8518287074735218418}
   canvas: {fileID: 1047968483559614266}
   levelIndicator: {fileID: 5821902752973753422}

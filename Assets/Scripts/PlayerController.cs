@@ -24,6 +24,10 @@ public class PlayerController : Singleton<PlayerController>
 	[Header("Animations")]
 	[SerializeField] private Ease easeRotation;
 
+	[Header("Audio")]
+	[SerializeField] private AudioExpress movementSound;
+	[SerializeField] private AudioExpress damageSound;
+
 	[Header("References")]
 	[SerializeField] private SwordController sword;
 
@@ -131,6 +135,7 @@ public class PlayerController : Singleton<PlayerController>
 		int tickCount = 0;
 		while (tickCount < 10)
 		{
+			movementSound.Play();
 			sword.transform?.DOKill();
 			Tweener rotater = sword.transform.DORotate(new Vector3(0f, 0f, -step), 1f, RotateMode.LocalAxisAdd).SetEase(easeRotation);
 			yield return rotater.WaitForCompletion();
@@ -151,6 +156,7 @@ public class PlayerController : Singleton<PlayerController>
 	public void TakeDamage()
 	{
 		Life--;
+		damageSound.Play();
 		Level.GenerateImpulse();
 		Level.FreezeTime();
 	}

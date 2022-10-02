@@ -9,9 +9,18 @@ using Utils.Dependency;
 using UnityEngine;
 using UnityEngine.UI;
 using static Facade;
+using System.Security.Permissions;
 
 public class CardHUD : Singleton<CardHUD>
 {
+	[Serializable]
+	public class Dialogue
+	{
+		public string dialogueName;
+		public int loopIndex;
+		[TextArea(3, 10)] public List<string> lines;
+	}
+
 	[Header("Gold")]
 	[SerializeField] private SpriteRenderer goldIcon;
 	[SerializeField] private TextMeshProUGUI goldCountText;
@@ -35,6 +44,10 @@ public class CardHUD : Singleton<CardHUD>
 	[Header("HUD")]
 	[SerializeField] private TextMeshProUGUI loopIndicator;
 	[SerializeField] private CanvasGroup shopButtons;
+	[SerializeField] private GenericDialoguePopup genericDialogue;
+
+	[Header("Dialogues")]
+	[SerializeField] private List<Dialogue> dialogues;
 
 	private CardData current;
 	private List<Image> lifeIndicators = new List<Image>();
@@ -55,6 +68,7 @@ public class CardHUD : Singleton<CardHUD>
 	protected override void Awake()
 	{
 		base.Awake();
+		Level.OnBuildingPhase += CheckDialogue;
 		Level.OnBuildingPhase += GetCard;
 		Level.OnBuildingPhase += Show;
 		Level.OnLoopingPhase += ResetCard;
@@ -65,6 +79,20 @@ public class CardHUD : Singleton<CardHUD>
 	public void SetGoldValue(int value)
 	{
 		goldCountText.text = value.ToString();
+	}
+
+	private void CheckDialogue()
+	{
+		Dialogue dialogue = dialogues.Where(x => x.loopIndex == Player.LoopIndex).FirstOrDefault();
+		if (dialogue is not null)
+		{
+			genericDialogue.Display(dialogue.lines);
+		}
+	}
+
+	private void DisplayDialogue(List<string> lines)
+	{
+		genericDialogue.Display(lines);
 	}
 
 	private void ResetCard()

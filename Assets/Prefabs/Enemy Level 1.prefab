@@ -401,5 +401,18 @@ MonoBehaviour:
     type: 3}
   lifeBarHolder: {fileID: 3244418302094746043}
   foregroundBar: {fileID: 8644455692214363723}
+  damageSound:
+    isUsingClips: 0
+    clip: {fileID: 8300000, guid: 7291a15b9b44aaa4797d951acd52c73d, type: 3}
+    clips: []
+    mixerGroup: {fileID: 8269627036593415818, guid: dbd143edd4df0224d92ac4ff39f0844e,
+      type: 2}
+    loopType: 0
+    timeBetweenLoop:
+      min: 1
+      max: 3
+    pitchVariation: 2
+    autoDestroy: 0
+    multiplier: 5
   spriteRenderer: {fileID: 8423470161492846744}
   shiledSprite: {fileID: -217416073, guid: 36e9304893bccfc489f87b6621270749, type: 3}

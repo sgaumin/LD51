@@ -23,6 +23,9 @@ public class ShopButton : MonoBehaviour
 	[SerializeField] private ShopButtonType type;
 	[SerializeField] private List<int> prices = new List<int>();
 
+	[Header("Sounds")]
+	[SerializeField] private AudioExpress clickSound;
+
 	[Header("References")]
 	[SerializeField] private TextMeshProUGUI costText;
 	[SerializeField] private Button button;
@@ -132,6 +135,7 @@ public class ShopButton : MonoBehaviour
 				break;
 		}
 
+		clickSound.Play();
 		UpdateCost();
 	}
 }

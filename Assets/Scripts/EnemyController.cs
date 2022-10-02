@@ -37,6 +37,9 @@ public class EnemyController : MonoBehaviour, ISwordTarget
 	[SerializeField] private GameObject lifeBarHolder;
 	[SerializeField] private Image foregroundBar;
 
+	[Header("Audio")]
+	[SerializeField] private AudioExpress damageSound;
+
 	[Header("References")]
 	[SerializeField] private SpriteRenderer spriteRenderer;
 	[SerializeField] private Sprite shiledSprite;
@@ -86,6 +89,7 @@ public class EnemyController : MonoBehaviour, ISwordTarget
 	{
 		if (hasBeenAlreadyTouched) return;
 
+		damageSound.Play();
 		Level.FreezeTime();
 		hasBeenAlreadyTouched = true;
 		lifePoints -= Player.Attack;
@@ -162,6 +166,7 @@ public class EnemyController : MonoBehaviour, ISwordTarget
 
 	private void Attack()
 	{
+		damageSound.Play();
 		EnemyBullet bullet = Instantiate(bulletPrefab);
 		bullet.transform.position = transform.position;
 		bullet.Shoot();
