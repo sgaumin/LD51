@@ -28,6 +28,9 @@ public class PlayerController : Singleton<PlayerController>
 	[SerializeField] private AudioExpress movementSound;
 	[SerializeField] private AudioExpress damageSound;
 
+	[Header("Effects")]
+	[SerializeField] private ParticleSystem dirtEffect;
+
 	[Header("References")]
 	[SerializeField] private SwordController sword;
 
@@ -131,11 +134,13 @@ public class PlayerController : Singleton<PlayerController>
 	private IEnumerator RotationCore()
 	{
 		OnStartLoop?.Invoke();
+
 		float step = 360f / 10f;
 		int tickCount = 0;
 		while (tickCount < 10)
 		{
 			movementSound.Play();
+			dirtEffect.Play();
 			sword.transform?.DOKill();
 			Tweener rotater = sword.transform.DORotate(new Vector3(0f, 0f, -step), 1f, RotateMode.LocalAxisAdd).SetEase(easeRotation);
 			yield return rotater.WaitForCompletion();
