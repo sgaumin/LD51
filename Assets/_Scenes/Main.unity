@@ -8505,8 +8505,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2024879293}
   - component: {fileID: 2024879294}
+  - component: {fileID: 2024879296}
+  - component: {fileID: 2024879295}
   m_Layer: 0
-  m_Name: PlayerSprite
+  m_Name: Character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8568,7 +8570,7 @@ SpriteRenderer:
   m_SortingLayerID: -722651681
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: baf77aa5ee6e93144bababa106bd9043, type: 3}
+  m_Sprite: {fileID: 1981639367, guid: d05f5048babbec948963d51103349ba2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -8579,6 +8581,38 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2024879295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2024879292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca1d02e5172e20f418b4817c5dc69cc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animations:
+  - {fileID: 11400000, guid: 159e249867b6e224b92394befd895733, type: 2}
+  _spriteRenderer:
+    _source: 0
+    _localReference: {fileID: 0}
+  _animatorExpressTester:
+    _source: 0
+    _localReference: {fileID: 0}
+--- !u!114 &2024879296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2024879292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15c29140cbeca0840a276dc3e632d826, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2052006958
 GameObject:
   m_ObjectHideFlags: 0
@@ -8850,7 +8884,7 @@ GameObject:
   - component: {fileID: 2084447568}
   - component: {fileID: 2084447566}
   m_Layer: 0
-  m_Name: Player
+  m_Name: CharacterHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
