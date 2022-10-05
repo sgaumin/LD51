@@ -8871,6 +8871,8 @@ MonoBehaviour:
   startLifePoint: 5
   startGold: 0
   startAttack: 1
+  fullRotationDuration: 0.8
+  easeFullRotation: 12
   easeRotation: 18
   movementSound:
     isUsingClips: 0

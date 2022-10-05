@@ -9,6 +9,7 @@ using Utils.Dependency;
 using UnityEngine;
 using UnityEngine.UI;
 using static Facade;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class PlayerController : Singleton<PlayerController>
 {
@@ -22,6 +23,8 @@ public class PlayerController : Singleton<PlayerController>
 	[SerializeField] private int startAttack = 1;
 
 	[Header("Animations")]
+	[SerializeField] private float fullRotationDuration = 2f;
+	[SerializeField] private Ease easeFullRotation;
 	[SerializeField] private Ease easeRotation;
 
 	[Header("Audio")]
@@ -35,6 +38,7 @@ public class PlayerController : Singleton<PlayerController>
 	[SerializeField] private SwordController sword;
 
 	private Coroutine swordRotation;
+	private Coroutine swordFullRotation;
 	private int goldCount;
 	private int attackCount;
 	private int maxLifeCount;
@@ -113,6 +117,8 @@ public class PlayerController : Singleton<PlayerController>
 		MaxLife = startLifePoint;
 		Life = startLifePoint;
 		Gold = startGold;
+
+		FullRotation(3);
 	}
 
 	private void HealFull()
@@ -120,7 +126,22 @@ public class PlayerController : Singleton<PlayerController>
 		Life = MaxLife;
 	}
 
-	[ContextMenu("StartSwordRotation")]
+	private void FullRotation(int turnCount = 1)
+	{
+		this.TryStartCoroutine(FullRotationCore(turnCount), ref swordFullRotation);
+	}
+
+	private IEnumerator FullRotationCore(int turnCount = 1)
+	{
+		for (int i = 0; i < turnCount; i++)
+		{
+			sword.transform?.DOKill();
+			sword.transform.rotation = Quaternion.identity;
+			Tweener rotater = sword.transform.DORotate(new Vector3(0f, 0f, 360f), fullRotationDuration, RotateMode.FastBeyond360).SetEase(easeFullRotation);
+			yield return rotater.WaitForCompletion();
+		}
+	}
+
 	public void StartSwordRotation()
 	{
 		this.TryStartCoroutine(RotationCore(), ref swordRotation);
