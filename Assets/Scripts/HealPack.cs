@@ -23,8 +23,10 @@ public class HealPack : MonoBehaviour, ISwordTarget
 		spriteRenderer.sortingLayerName = "CardHUD";
 		spriteRenderer.sortingOrder = 10;
 
-		Player.Life++;
-
-		Destroy(gameObject);
+		transform.DOMove(Card.GetCurrentHeartIconPosition(), 0.6f).SetEase(Ease.OutSine).OnComplete(() =>
+		{
+			Player.Life++;
+			Destroy(gameObject);
+		});
 	}
 }

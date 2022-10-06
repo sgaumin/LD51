@@ -13967,6 +13967,8 @@ MonoBehaviour:
   levelLoader: {fileID: 494327762966591146}
   music: {fileID: 4584431144262942694}
   effectHandler: {fileID: 723602954365531262}
+  worldCamera: {fileID: 2045531256005342981}
+  hudCamera: {fileID: 484784751}
 --- !u!224 &1573577736087462406
 RectTransform:
   m_ObjectHideFlags: 0

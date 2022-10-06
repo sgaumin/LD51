@@ -63,7 +63,7 @@ public class Gold : MonoBehaviour, ISwordTarget
 		spriteRenderer.sortingLayerName = "CardHUD";
 		spriteRenderer.sortingOrder = 10;
 
-		transform.DOMove(CardHUD.Instance.GoldIconPosition, 0.6f).SetEase(Ease.OutSine).OnComplete(() =>
+		transform.DOMove(Card.GoldIconPosition, 0.6f).SetEase(Ease.OutSine).OnComplete(() =>
 		{
 			Player.Gold++;
 			Destroy(gameObject);

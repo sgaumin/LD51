@@ -90,11 +90,6 @@ public class CardHUD : Singleton<CardHUD>
 		}
 	}
 
-	private void DisplayDialogue(List<string> lines)
-	{
-		genericDialogue.Display(lines);
-	}
-
 	private void ResetCard()
 	{
 		cardSpriteRenderer.sprite = defaultCardSprite;
@@ -129,8 +124,22 @@ public class CardHUD : Singleton<CardHUD>
 
 		for (int i = 0; i < lifeIndicators.Count; i++)
 		{
-			lifeIndicators[i].sprite = i <= (Player.Life - 1) ? fullHeart : emptyHeart;
+			bool check = i <= (Player.Life - 1);
+			lifeIndicators[i].sprite = check ? fullHeart : emptyHeart;
 		}
+	}
+
+	public Vector3 GetCurrentHeartIconPosition()
+	{
+		for (int i = 0; i < lifeIndicators.Count; i++)
+		{
+			bool check = i <= (Player.Life - 1);
+			if (!check)
+			{
+				return lifeIndicators[i].rectTransform.position;
+			}
+		}
+		return lifeIndicators[^1].rectTransform.position;
 	}
 
 	public void Show()
