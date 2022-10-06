@@ -120,9 +120,9 @@ MonoBehaviour:
   selectedSprite: {fileID: 1719463936, guid: 15a7212a934423e4aaa9e76d8d2193e3, type: 3}
   selectionSound:
     isUsingClips: 0
-    clip: {fileID: 8300000, guid: 67ca0447f9490044187ccbff74a89f40, type: 3}
+    clip: {fileID: 8300000, guid: 7d5ae9bc0d5f4ea4a82b8610cf57fc04, type: 3}
     clips: []
-    mixerGroup: {fileID: 8557278918978590860, guid: dbd143edd4df0224d92ac4ff39f0844e,
+    mixerGroup: {fileID: 4725530673989501136, guid: dbd143edd4df0224d92ac4ff39f0844e,
       type: 2}
     loopType: 0
     timeBetweenLoop:

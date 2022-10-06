@@ -1,3 +1,4 @@
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using static Facade;
@@ -10,6 +11,7 @@ public class BuildingSlot : MonoBehaviour
 	[Header("Animations")]
 	[SerializeField] private Sprite defaultSprite;
 	[SerializeField] private Sprite selectedSprite;
+	[SerializeField] private float fadeDuration = 0.2f;
 
 	[Header("Audio")]
 	[SerializeField] private AudioExpress selectionSound;
@@ -38,6 +40,12 @@ public class BuildingSlot : MonoBehaviour
 									currentBuilding is null &&
 									!GenericDialoguePopup.IsActive;
 
+	private void Awake()
+	{
+		Level.OnBuildingPhase += FadeIn;
+		Level.OnLoopingPhase += FadeOut;
+	}
+
 	public void SetItemSpawn(Vector2 position)
 	{
 		itemSpawn.transform.position = position;
@@ -60,6 +68,7 @@ public class BuildingSlot : MonoBehaviour
 	{
 		if (ConditionsMet)
 		{
+			selectionSound.Play();
 			spriteRenderer.sprite = selectedSprite;
 		}
 	}
@@ -102,6 +111,22 @@ public class BuildingSlot : MonoBehaviour
 		spriteRenderer.enabled = true;
 		currentBuilding = null;
 		spriteRenderer.sprite = defaultSprite;
+	}
+
+	private void FadeIn()
+	{
+		spriteRenderer.DOKill();
+		spriteRenderer.DOFade(1f, fadeDuration);
+		levelIndicator.DOKill();
+		levelIndicator.DOFade(1f, fadeDuration);
+	}
+
+	private void FadeOut()
+	{
+		spriteRenderer.DOKill();
+		spriteRenderer.DOFade(0f, fadeDuration);
+		levelIndicator.DOKill();
+		levelIndicator.DOFade(0f, fadeDuration);
 	}
 
 	private void UpdateLevelIndicator(int value)
