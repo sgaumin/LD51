@@ -1122,7 +1122,7 @@ CanvasGroup:
   m_Enabled: 1
   m_Alpha: 0
   m_Interactable: 0
-  m_BlocksRaycasts: 1
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &552710927
 MonoBehaviour:
@@ -13967,8 +13967,6 @@ MonoBehaviour:
   levelLoader: {fileID: 494327762966591146}
   music: {fileID: 4584431144262942694}
   effectHandler: {fileID: 723602954365531262}
-  worldCamera: {fileID: 2045531256005342981}
-  hudCamera: {fileID: 484784751}
 --- !u!224 &1573577736087462406
 RectTransform:
   m_ObjectHideFlags: 0

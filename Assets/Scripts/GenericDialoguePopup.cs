@@ -25,6 +25,12 @@ public class GenericDialoguePopup : MonoBehaviour
 	private Coroutine displaying;
 	private bool next;
 
+	private void Start()
+	{
+		group.blocksRaycasts = false;
+		group.interactable = false;
+	}
+
 	public void Display(List<string> lines)
 	{
 		IsActive = true;
